@@ -11,13 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.hack14.colmena.dtos.UserDto;
 import dev.hack14.colmena.models.Ad;
 import dev.hack14.colmena.models.User;
 import dev.hack14.colmena.services.AdService;
-import io.micrometer.core.ipc.http.HttpSender.Response;
-
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;

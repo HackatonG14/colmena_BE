@@ -4,7 +4,6 @@ import dev.hack14.colmena.models.Contact;
 import dev.hack14.colmena.models.User;
 import dev.hack14.colmena.models.Ad;
 import dev.hack14.colmena.repositories.ContactRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +42,6 @@ public class ContactService {
     public Contact createContact(Contact contact) {
         Contact savedContact = contactRepository.save(contact);
         
-        // Create notification for the ad owner
         notificationService.createContactNotification(savedContact);
         
         return savedContact;
