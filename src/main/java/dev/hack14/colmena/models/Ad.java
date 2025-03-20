@@ -27,18 +27,20 @@ public class Ad {
     private Date datePosted;
     
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User advertiser;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User admin;
 
     private String imageUrl;
 
-    public Ad(Long id, String title, String description, String category, Date datePosted, User advertiser, String imageUrl) {
+    public Ad() {}
+
+    public Ad(Long id, String title, String description, String category, Date datePosted, User admin, String imageUrl) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.category = category;
         this.datePosted = datePosted;
-        this.advertiser = advertiser;
+        this.admin = admin;
         this.imageUrl = imageUrl;
     }
 
@@ -82,12 +84,12 @@ public class Ad {
         this.datePosted = datePosted;
     }
 
-    public User getAdvertiser() {
-        return advertiser;
+    public User getAdmin() {
+        return admin;
     }
 
-    public void setAdvertiser(User advertiser) {
-        this.advertiser = advertiser;
+    public void setAdmin(User admin) {
+        this.admin = admin;
     }
 
     public String getImageUrl() {
