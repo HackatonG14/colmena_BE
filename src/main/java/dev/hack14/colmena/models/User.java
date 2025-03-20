@@ -3,6 +3,8 @@ package dev.hack14.colmena.models;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import dev.hack14.colmena.enums.Role;
+
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,24 +26,24 @@ public class User {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
-    private Boolean active;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
 
     public User() {
 
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, Role role) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.active = true;
+        this.role = role;
     }
 
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
-        this.active = true;
     }
 
     public Long getId() {
@@ -84,11 +86,12 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public Boolean getActive() {
-        return active;
+    public Role getRole() {
+        return role;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setRole(Role role) {
+        this.role = role;
     }
+
 }
