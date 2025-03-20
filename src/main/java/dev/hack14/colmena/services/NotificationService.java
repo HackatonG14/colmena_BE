@@ -15,7 +15,7 @@ public class NotificationService {
 
     @Autowired
     private NotificationRepository notificationRepository;
-    
+
     public List<Notification> getAllNotifications() {
         return notificationRepository.findAll();
     }
@@ -24,7 +24,6 @@ public class NotificationService {
         return notificationRepository.findById(id);
     }
 
-    // Métodos originales que usan la entidad User
     public List<Notification> getNotificationsByUser(User user) {
         return notificationRepository.findByUserOrderByCreatedAtDesc(user);
     }
@@ -37,7 +36,6 @@ public class NotificationService {
         return notificationRepository.countByUserAndRead(user, false);
     }
 
-    // Nuevos métodos que usan userId directamente
     public List<Notification> getNotificationsByUserId(Long userId) {
         return notificationRepository.findByUserIdOrderByCreatedAtDesc(userId);
     }
@@ -57,14 +55,13 @@ public class NotificationService {
     public Notification createContactNotification(Contact contact) {
         User adOwner = contact.getAd().getAdmin();
         String message = "Alguien está interesado en tu anuncio: " + contact.getAd().getTitle();
-        
+
         Notification notification = new Notification(
-            adOwner,
-            message,
-            contact.getAd(),
-            contact
-        );
-        
+                adOwner,
+                message,
+                contact.getAd(),
+                contact);
+
         return notificationRepository.save(notification);
     }
 
@@ -79,7 +76,8 @@ public class NotificationService {
     }
 
     public void markAllAsReadByUserId(Long userId) {
-        List<Notification> unreadNotifications = notificationRepository.findByUserIdAndReadOrderByCreatedAtDesc(userId, false);
+        List<Notification> unreadNotifications = notificationRepository.findByUserIdAndReadOrderByCreatedAtDesc(userId,
+                false);
         unreadNotifications.forEach(notification -> notification.setRead(true));
         notificationRepository.saveAll(unreadNotifications);
     }
