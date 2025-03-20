@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdRepository extends JpaRepository<Ad, Long> {
+    List<Ad> findByAdmin(User admin);
+    List<Ad> findByTitleContainingIgnoreCase(String title);
     List<Ad> findByCategory(String category);
-    List<Ad> findByTitleContaining(String title);
-    List<Ad> findByAdvertiser_Id(User id);
 }
